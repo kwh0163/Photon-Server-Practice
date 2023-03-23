@@ -1,0 +1,27 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CameraShake : MonoBehaviour
+{
+    private float endtime = 0;
+    private Vector3 direction;
+
+    private void Start()
+    {
+        direction = transform.localPosition;
+    }
+    public IEnumerator Shake(float amount,float duration)
+    {
+        while(endtime <= duration)
+        {
+            transform.localPosition = (Vector3)Random.insideUnitCircle * amount + direction;
+
+            duration -= Time.deltaTime;
+
+            yield return null;
+        }
+
+        transform.localPosition = direction;
+    }
+}
